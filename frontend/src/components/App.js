@@ -87,7 +87,7 @@ function App() {
         setCurrentUser(newUserData);
         closeAllPopups();
       })
-      .catch(err => console.log(`Ошибка при обновлении данных профиля: ${err}`))
+      .catch(err => console.error(`Ошибка при обновлении данных профиля: ${err}`))
       .finally(() => {
         setIsLoadingApiRequest(false);
       })
@@ -180,7 +180,6 @@ function App() {
   const checkToken = React.useCallback(() => {
     auth.getContent()
       .then((data) => {
-        console.log(data)
         if (data) {
           setUserData({...data})
           setLoggedIn(true)
@@ -201,7 +200,6 @@ React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([user, initialCards]) => {
       setCurrentUser(Object.assign(currentUser, user));
-      console.log(currentUser);
       setCards(initialCards);
     })
     .catch((err) => console.error(err));
