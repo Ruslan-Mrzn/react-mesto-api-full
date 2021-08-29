@@ -191,9 +191,9 @@ function App() {
       .catch((err) => console.error(err))
   }, [history]);
 
-React.useEffect(() => {
-  checkToken();
-}, [checkToken, loggedIn])
+  React.useEffect(() => {
+    checkToken();
+  }, [checkToken, loggedIn])
 
 
   React.useEffect(() => {
