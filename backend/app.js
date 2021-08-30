@@ -40,22 +40,22 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-app.use(helmet());
+app.use(helmet()); // простановка secutity-заголовков http запросов
 
-app.use(limiter);
+app.use(limiter); // ограничение кол-ва запросов (защита от DoS-атак)
 
 app.use(cookieParser()); // подключаем парсер кук как мидлвэр
 
 app.use(requestLogger); // подключаем логгер запросов
 
-app.use(cors({ credentials: true, origin: true }));
+app.use(cors({ credentials: true, origin: true })); // cors-мидвара
 
-// // Краш-тест сервера
-// app.get('/crash-test', () => {
-//   setTimeout(() => {
-//     throw new Error('Сервер сейчас упадёт');
-//   }, 0);
-// });
+// Краш-тест сервера, не забыть убрать после сдачи работы!
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -74,13 +74,8 @@ app.post('/signup', celebrate({
   }),
 }), createUser);
 
-// авторизация
+// авторизация перед защищаемыми роутами
 app.use(require('./middlewares/auth'));
-// celebrate({
-//   cookies: Joi.object().keys({
-//     jwt: Joi.string().required(),
-//   }).unknown(true),
-// }),
 
 app.post('/signout', logout);
 

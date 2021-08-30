@@ -34,12 +34,6 @@ module.exports.getCurrentUser = (req, res, next) => {
 
 module.exports.getUser = (req, res, next) => {
   const { id } = req.params;
-  if (id === 'me') {
-    User.findById(req.user._id)
-      .then((user) => res.send(user))
-      .catch((err) => next(err));
-    return;
-  }
   User.findById(id)
     .then((user) => {
       if (!user) {
