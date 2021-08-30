@@ -25,6 +25,7 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
 });
+
 app.set('trust proxy', 1);
 app.use(express.json()); // для собирания JSON-формата
 app.use(express.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
@@ -42,11 +43,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(helmet()); // простановка secutity-заголовков http запросов
 
-app.use(limiter); // ограничение кол-ва запросов (защита от DoS-атак)
-
 app.use(cookieParser()); // подключаем парсер кук как мидлвэр
 
 app.use(requestLogger); // подключаем логгер запросов
+
+app.use(limiter); // ограничение кол-ва запросов (защита от DoS-атак)
 
 app.use(cors({ credentials: true, origin: true })); // cors-мидвара
 
