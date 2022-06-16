@@ -1,6 +1,4 @@
-# `Git submodules` для приложения `Mesto` (frontend + backend) 
-
-## [Ссылка](https://murzin.ruslan.students.nomoredomains.monster/) на проект (развернут на виртуальной машине с помощью сервиса Yandex.Cloud)
+# `Git submodules` для приложения `Mesto` (frontend + backend)
 
 ## Описание
 
